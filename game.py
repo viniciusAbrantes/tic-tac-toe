@@ -1,23 +1,17 @@
-def play(gameboard, player, row_choice, col_choice):
-    gameboard[row_choice][col_choice] = player
-    
-    #Verify if it has a winner
-    #TODO
+from functions import *
+from itertools import cycle
 
-    return gameboard
+gameboard = [[0,0,0], [0,0,0], [0,0,0]]
+#game_size = int(input("Inform the gameboard size: "))
 
-def print_gameboard(gameboard):
-    for row in gameboard:
-        print(row)
-
-game_size = int(input("Inform the gameboard size: "))
-
-gameboard = []
-for i in range(game_size):
-    row = []
-    for col in range(game_size):
-        row.append(0)
-    gameboard.append(row)
-
-gameboard = play(gameboard, 1, 0, 0)
-print_gameboard(gameboard)
+players = cycle([1, 2])
+game_over = False
+while(not game_over):
+    current_player = next(players)
+    valid_choice = False
+    while(not valid_choice):
+        print_gameboard(gameboard)
+        row_choice = int(input("Inform the row you wanna play: "))
+        col_choice = int(input("Inform the column you wanna play: "))
+        valid_choice, gameboard = play(gameboard, current_player, row_choice, col_choice)
+        game_over = check_win(gameboard)
