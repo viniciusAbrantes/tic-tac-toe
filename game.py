@@ -20,3 +20,5 @@ while(not game_over):
         os.system('cls' if os.name == 'nt' else 'clear')
         valid_choice, gameboard = play(gameboard, current_player, row_choice, col_choice)
         game_over = check_win(gameboard)
+        if not game_over:
+            game_over = check_draw(gameboard)
